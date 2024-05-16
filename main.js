@@ -92,7 +92,15 @@ async function loadWind(url){
     const jsondata = await response.json();
     console.log(jsondata)
     L.velocityLayer({
-        data: jsondata
+        data: jsondata,
+        lineWidth: 2,
+        displayOptions: {
+            directionString: "Windrichtung",
+            speedString: "Windgeschwindigkeit",
+            speedUnit: "km/h",
+            position: "bottomright",
+            velocityType: "",
+        }
     }).addTo(themaLayer.wind);
 
 }
