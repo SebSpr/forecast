@@ -52,9 +52,14 @@ async function showForecast(url) {
             `;
             for (var i = 0; i <= 24; i += 3) {
                 var symbol = feature.properties.timeseries[i].data.next_1_hours.summary.symbol_code;
-                content += `<img src="icons/${symbol}.svg" alt="${symbol}" style="width:32px">`;
-                console.log(i, symbol);
+                var time = new Date(feature.properties.timeseries[i].time);
+                content += `<img src="icons/${symbol}.svg" alt="${symbol}" style="width:32px" title="${time.toLocaleString()}">`;
             }
+
+            // Link zum Datendownload
+            content += `
+                <p><a href="${url}" target="met.no">Daten downloaden</a></p>
+            `
 
             L.popup(latlng, {
                 content: content
