@@ -78,6 +78,7 @@ map.on("click", function(evt){
     showForecast(`https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${evt.latlng.lat}&lon=${evt.latlng.lng}`);
 });
 
+// Klick auf IBK simulieren
 map.fire("click", {
     latlng: ibk
 });
