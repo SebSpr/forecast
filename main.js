@@ -34,6 +34,11 @@ L.control.scale({
 async function showForecast(url) {
     let response = await fetch(url);
     let jsondata = await response.json();
+    L.geoJSON(jsondata, {
+        pointToLAyer: function(feature, latlng){
+            
+        }
+    }).addTo(themaLayer.forecast);
 
     // aktuelles Wetter und Wettervorhersage implementieren
     console.log(jsondata);
