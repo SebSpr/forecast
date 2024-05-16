@@ -40,7 +40,7 @@ async function showForecast(url) {
             var time = new Date(feature.properties.timeseries[0].time);
             var content = `
             
-            <h4>Wettervorhersage für ${time.toLocaleDateString()}</h4>
+            <h4>Wettervorhersage für ${time.toLocaleString()}</h4>
             <ul>
                 <li>Luftdruck (hPa): ${details.air_pressure_at_sea_level}</li>
                 <li>Lufttemperatur (°C): ${details.air_temperature}</li>
@@ -50,9 +50,15 @@ async function showForecast(url) {
                 <li>Windgeschwindigkeit (km/h): ${Math.round(details.wind_speed * 3.6)}</li>
             </ul>
             `;
-            L.popup(latlng, { 
+            for (var i = 0; i <= 24; i += 3) {
+                var symbol = feature.properties.timeseries[i].data.next_1_hours.summary.symbol_code;
+                content += `<img src="icons/${symbol}.svg" alt="${symbol}" style="width:32px">`;
+                console.log(i, symbol);
+            }
+
+            L.popup(latlng, {
                 content: content
-         }).openOn(themaLayer.forecast);
+            }).openOn(themaLayer.forecast);
         }
     }).addTo(themaLayer.forecast);
 
